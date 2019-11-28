@@ -44,4 +44,7 @@ public class Player {
         }
         return add_point;
     }
+    public void comment(){
+        System.out.println("Try one more game bros !");
+    }
 }

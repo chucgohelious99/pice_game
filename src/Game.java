@@ -12,6 +12,7 @@ public class Game {
         try {
             System.out.println("Please enter the number of player: ");
             int numberOfPlayer = sc.nextInt();
+            sc.nextLine();
             // Create player
             List<Player> listOfPlayer = new ArrayList<Player>();
             String playerName ;
@@ -36,9 +37,30 @@ public class Game {
                 System.out.println("\nnow is turn of player "+ indexPlayer);
                 Player player = listOfPlayer.get(indexPlayer);
                 int resultTurn = player.play();
+                try{
+                    Thread.sleep(1000);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
                 System.out.println("player "+ indexPlayer +" get " + resultTurn+" score");
+
                 if (!judger.calculateScore(player, resultTurn)) {
                     System.out.println("Game over");
+                    System.out.println("--------------------------------------------");
+                    System.out.println("Comment after game:");
+                    if(indexPlayer < numberOfPlayer){
+                        for(int j=numberOfPlayer; j<4;j++){
+                            System.out.println("Player "+j+ " :");
+                            InviPlayer invi=(InviPlayer) listOfPlayer.get(j);
+                            invi.acay();
+                        }
+                        System.out.println("Comment of winner:");
+                        listOfPlayer.get(indexPlayer).comment();
+                    }else{
+                        InviPlayer winnerInvi = (InviPlayer) listOfPlayer.get(indexPlayer);
+                        System.out.println("Comment of winner:");
+                        winnerInvi.bark();
+                    }
                     break;
                 }
                 //judger.calculateScore(player,resultTurn);
